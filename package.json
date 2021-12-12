@@ -1,0 +1,23 @@
+{
+  "name": "chatroom-react-test",
+  "version": "1.0.0",
+  "description": "Evaluation Test Javascript",
+  "main": "index.js",
+  "dependencies": {
+    "nanoid": "^3.1.30"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zerg41/chatroom-react-test.git"
+  },
+  "author": "zerg41",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zerg41/chatroom-react-test/issues"
+  },
+  "homepage": "https://github.com/zerg41/chatroom-react-test#readme"
+}
