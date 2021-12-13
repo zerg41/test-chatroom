@@ -1,7 +1,5 @@
 // средства маршрутизации
 import { Switch, Route } from 'react-router-dom'
-// хуки
-import { useLocalStorage } from './hooks/useLocalStorage';
 // компоненты
 import Header from './components/Header';
 import Home from './components/Home'

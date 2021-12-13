@@ -17,8 +17,9 @@ function MessageForm({ username, sendMessage, roomId }) {
     const handleSendMessage = (evt) => {
         evt.preventDefault();
     
-        const trimmed = text.trim();
-        if (trimmed) {
+        const trimmedText = text.trim();
+        
+        if (trimmedText) {
             sendMessage({ messageText: text, senderName: username, roomId: roomId });
             setText('');
         }

@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 // стили
 import { ListGroup } from 'reactstrap';
-// компонент
+// компоненты
 import MessageListItem from './MessageList/MessageListItem';
 
 

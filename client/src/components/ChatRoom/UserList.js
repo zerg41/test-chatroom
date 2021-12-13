@@ -9,8 +9,8 @@ function UserList({ users }) {
     // количество активных пользователей
     const activeUsersNumber = Object.values(users).filter((user) => user.online).length;
 
+    // управление выпадающим списком активных пользователей
     const [accordionId, setAccordionId] = useState('');
-
     const accordionTogggle = () => {
         accordionId === '1' ? setAccordionId('') : setAccordionId('1');
     };
@@ -37,10 +37,19 @@ function UserList({ users }) {
                                         >
                                             UserID: {userId}
                                         </CardSubtitle>
+                                        <CardSubtitle
+                                        className="" 
+                                        tag="h6"
+                                        >
+                                            Chat in room with ID:<br/> 
+                                            {obj.inRoom}
+                                        </CardSubtitle>
                                     </CardBody>
                                 </Card>
                             );
-                        } else return null;
+                        } else {
+                            return null;
+                        }
                     })}
                 </AccordionBody>
             </AccordionItem>

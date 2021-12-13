@@ -1,20 +1,32 @@
 import { nanoid } from 'nanoid';
-// для маршрутизации используется react-router-dom
-import { useHistory } from 'react-router-dom';
-// кастомный хук
-import { useLocalStorage } from '../hooks/useLocalStorage';
+// маршрутизация
+import { useHistory, useLocation } from 'react-router-dom';
+// хуки
+// import { useLocalStorage } from '../hooks/useLocalStorage'; --заменил на хранение в рамках сессии
+import { useSessionStorage } from '../hooks/useSessionStorage';
 // стили
 import { Form, Button, FormGroup, Label } from 'reactstrap';
+import { useEffect } from 'react';
 
 
 function Home() {
-    // создаем и записываем в локальное хранилище имя пользователя
-    // или извлекаем его из хранилища
-    const [username, setUsername] = useLocalStorage('username', '');
+    // локальное состояние для имени пользователя
+    const [username, setUsername] = useSessionStorage('username', '');
     // локальное состояние для комнаты
-    const [roomId, setRoomId] = useLocalStorage('roomId', '');
-    const locationHistory = useHistory();
+    const [roomId, setRoomId] = useSessionStorage('roomId', '');
+    // используем объект истории для перехода на страницу с чатом после авторизации пользователя
+    const history = useHistory();
 
+    // вытаскиваем параметры запроса на присоединение к комнате из URL в адресной строке
+    let searchParam = useLocation().search;
+    // присваиваем идентификатор комнаты из запроса на присоединение
+    useEffect(() => {
+        if (searchParam && !roomId) {
+            const roomIdInvite = searchParam.substring(searchParam.indexOf('=') + 1);
+            setRoomId(roomIdInvite);
+        }
+    }, [searchParam, roomId])
+    
     // обрабатываем изменение имени пользователя
     const handleChangeName = (evt) => {
         setUsername(evt.target.value);
@@ -22,17 +34,20 @@ function Home() {
 
     // присваиваем идентификатор новой комнате
     const generateNewRoomId = () => {
-        
         setRoomId(nanoid(10));
     };
 
     // обрабатываем переход в чат-комнату
     const handleLogin = (evt) => {
         evt.preventDefault();
-
-        generateNewRoomId();
-        locationHistory.push(`/${roomId}`);
+        // проверяем заходил/приглашен ли пользователь в чат-комнату
+        if (!roomId) {
+            generateNewRoomId();
+        }
+        // передаем в чат-комнату имя пользователя и id комнаты и переходим в нее
+        history.push(`/${roomId}`, {username: username, roomId: roomId});
     };
+
 
     const trimmedUserName = username.trim();
 

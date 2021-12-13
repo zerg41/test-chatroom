@@ -1,14 +1,13 @@
 // нормализованная структура
 // имитация БД
 const users = {
-    1: { username: 'Alice', online: false },
-    2: { username: 'Bob', online: false }
+    1: { username: 'Alice', online: false, inRoom: '' },
+    2: { username: 'Bob', online: false, inRoom: '' },
 };
 
 
 
 module.exports = (io, socket) => {
-
     // обрабатываем запрос на получение пользователей
     // свойство "roomId" является распределенным,
     // поскольку используется как для работы с пользователями,
@@ -24,10 +23,16 @@ module.exports = (io, socket) => {
         // проверяем, имеется ли пользователь в БД
         if (!users[userId]) {
             // если не имеется, добавляем его в БД
-            users[userId] = { username, online: true };
+            users[userId] = { username, online: true, inRoom: socket.roomId };
         } else {
             // если имеется, меняем его статус на онлайн
             users[userId].online = true;
+            // и обновляем значение текущей комнаты
+            users[userId].inRoom = socket.roomId;
+            // обновляем имя в случае если пользователь вышел из чата и заменил имя
+            if (users[userId].username !== username) {
+                users[userId].username = username;
+            }
         }
         // выполняем запрос на получение пользователей
         getUsers()
@@ -35,11 +40,9 @@ module.exports = (io, socket) => {
 
     // обрабатываем удаление пользователя
     const removeUser = (userId) => {
-        // одно из преимуществ нормализованных структур состоит в том,
-        // что мы может моментально (O(1)) получать данные по ключу
-        // это актуально только для изменяемых (мутабельных) данных
-        // в redux, например, без immer, нормализованные структуры привносят дополнительную сложность
+        // под удалением подразумеваем его исключение из списка онлайн
         users[userId].online = false;
+        users[userId].inRoom = '';
         getUsers();
     }
 

@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import { nanoid } from 'nanoid';
 // хуки
-import { useLocalStorage } from './useLocalStorage';
+// import { useLocalStorage } from './useLocalStorage';
+import { useSessionStorage } from './useSessionStorage';
 
 // адрес сервера
 // требуется перенаправление запросов - смотрите ниже
@@ -18,9 +19,9 @@ export const useChat = (roomId) => {
     const [messages, setMessages] = useState([]);
 
     // создаем и записываем в локальное хранинище идентификатор пользователя
-    const [userId] = useLocalStorage('userId', nanoid(8));
+    const [userId] = useSessionStorage('userId', nanoid(8));
     // получаем из локального хранилища имя пользователя
-    const [username] = useLocalStorage('username');
+    const [username] = useSessionStorage('username');
 
     // useRef() используется не только для получения доступа к DOM-элементам,
     // но и для хранения любых мутирующих значений в течение всего жизненного цикла компонента
