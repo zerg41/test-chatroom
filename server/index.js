@@ -21,16 +21,15 @@ io.on('connection', (socket) => {
     socket.join(roomId);
   
     // регистрируем обработчики
-    // обратите внимание на передаваемые аргументы
-    registerMessageHandlers(io, socket, roomId);
+    registerMessageHandlers(io, socket);
     registerUserHandlers(io, socket);
   
     // обрабатываем отключение сокета-пользователя
     socket.on('disconnect', () => {
         // выводим сообщение
-        console.log('User disconnected')
+        console.log('User disconnected');
         // покидаем комнату
-        socket.leave(roomId)
+        socket.leave(roomId);
     });
 });
 
