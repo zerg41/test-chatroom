@@ -1,52 +1,28 @@
 # chatroom-react-test
-Тестовое задание на React разработчика
-
-## Описание приложения
-
-Приложение Chat Room позволяет пользователям общаться с другими пользователями в приватных чатах
-
-## Стек технологий
-
+Fullstack Developer Test Task
+## Application Description
+The Chat Room app allows users to chat with other users in private chats
+## Technology stack
 - React
 - React Router
 - Node.js
 - Socket.io
 - Bootstrap
+## Application launch
+To run the application, do the following:
+- Clone repository
+- Install general dependencies, as well as server and client dependencies
+- Execute server startup commands while in the /server and /client directories in turn
+## Application use
+Create a chat:
+- After starting the client, go to the start page (localhost:3000/)
+- Specify a name and press the New Chat button or the Enter key
+- A new room will be created and the form will display the ID of the new room
+- Press the Enter Chat button or the Enter key
+- Start chatting
 
-## Запуск приложения
-
-Для запуска приложения необходимо сделать следующее:
-
-- Клонировать репозиторий
-
-- Установить общие зависимости, а также зависимости сервера и клиента
-
-- Выполнить команды запуска сервера, находясь в директории /server и /client поочередно
-
-## Использование приложения
-
-*Приложение еще находится в разработке*
-
-Создание чата:
-
-- После запуска клиента, перейти на начальную страницу (localhost:3000/)
-
-- Указать имя и нажать кнопку New Chat или клавишу Enter
-
-- Будет создана новая комната, после чего в форме отобразится идентификатор новой комнаты
-
-- Нажать кнопку Enter Chat или клавишу Enter
-
-- Начать общаться
-
-Приглашение пользователя:
-
-- В чат комнате под идентификатором комнаты скопировать ссылку 
-(Copy and share this link to invite your friends: localhost:3000/?roomId=YOUR_ROOM_ID)
-и передать ее другому пользователю
-
-- Другой пользователь вбивает в строку браузера, переданную ссылку выше и в форме авторизации автоматически должен подставить идентификатор общей комнаты
-
-- Указать имя и нажать кнопку Enter Chat или клавишу Enter
-
-- Начать общаться
+User prompt:
+- In the chat room, under the room ID, copy the link (Copy and share this link to invite your friends: localhost:3000/?roomId=YOUR_ROOM_ID) and transfer it to another user
+- Another user types in the browser line, the link passed above and in the authorization form should automatically substitute the identifier of the common room
+- Specify a name and press the Enter Chat button or the Enter key
+- Start chatting
